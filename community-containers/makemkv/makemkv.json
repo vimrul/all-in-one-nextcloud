@@ -1,0 +1,44 @@
+{
+    "aio_services_v1": [
+        {
+            "container_name": "nextcloud-aio-makekv",
+            "display_name": "MakeMKV",
+            "documentation": "https://github.com/nextcloud/all-in-one/tree/main/community-containers/makemkv",
+            "image": "jlesage/makemkv",
+            "image_tag": "latest",
+            "internal_port": "5800",
+            "restart": "unless-stopped",
+            "ports": [
+                {
+                    "ip_binding": "",
+                    "port_number": "5800",
+                    "protocol": "tcp"
+                }
+            ],
+            "volumes": [
+                {
+                    "source": "nextcloud_aio_makemkv",
+                    "destination": "/config",
+                    "writeable": true
+                },
+                {
+                    "source": "%NEXTCLOUD_DATADIR%",
+                    "destination": "/storage",
+                    "writeable": false
+                },
+                {
+                    "source": "%NEXTCLOUD_MOUNT%", --> add note that this needs to be configured, else it will discard it.
+                    "destination": "/output", --> add to readme how to configure this in the makemkv gui (so that e.g. a subdir can be used)
+                    "writeable": true
+                }
+            ],
+            "backup_volumes": [
+                "nextcloud_aio_makemkv"
+            ],
+            "devices": [
+                "/dev/sr0", -> check the devices for my drive, also add to readme that this device needs to be present
+                "/dev/sg2" -> check the devices for my drive, also add to readme that this device needs to be present
+            ]
+        }
+    ]
+}
