@@ -27,10 +27,22 @@
                     "writeable": false
                 },
                 {
-                    "source": "%NEXTCLOUD_MOUNT%", --> add note that this needs to be configured, else it will discard it.
-                    "destination": "/output", --> add to readme how to configure this in the makemkv gui (so that e.g. a subdir can be used)
+                    "source": "%NEXTCLOUD_MOUNT%",
+                    "destination": "/output",
                     "writeable": true
                 }
+            ],
+            "environment": [
+                "TZ=%TIMEZONE%",
+                "SECURE_CONNECTION=1",
+                "WEB_AUTHENTICATION=1",
+                "USER_ID=33",
+                "GROUP_ID=33",
+                "WEB_AUTHENTICATION_USERNAME=makemkv",
+                "WEB_AUTHENTICATION_PASSWORD=%MAKEMKV_PASSWORD%"
+            ],
+            "secrets": [
+                "MAKEMKV_PASSWORD"
             ],
             "backup_volumes": [
                 "nextcloud_aio_makemkv"
